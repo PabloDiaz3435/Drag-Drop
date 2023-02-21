@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es" s>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="ejer8.css" type="text/css">
+    <title>Ejercicio 8 </title>
+
+
+    <script type="text/javascript">
+        function empezar(ev) {
+
+            ev.dataTransfer.effectAllowed = 'move';
+            ev.dataTransfer.setData("Data", ev.target.getAttribute('id'));
+            //ev.dataTransfer.setDragImage(ev.target, 0, 0):
+            return true;
+        }
+
+        function entrar(ev) {
+            return true;
+        }
+
+        function encima(ev) {
+            //Guardar en una vble llamada arrastraId, lo que me devuleve getData de mi dataTransfer
+            //Guarda en una vble llamada contenedorId, lo que recoges con getAttribute por ID
+            var arrastraId = ev.dataTransfer.getData("Data");
+            var contenedorId = ev.target.getAttribute('id');
+            if (arrastraId.substring(1, 2) == contenedorId.substring(1, 2)) {
+                document.getElementById(contenedorId).style.background = "#CEF608";
+                return false;
+            } else {
+                document.getElementById(contenedorId).style.background = "#F78181";
+                return true;
+            }
+        }
+
+
+        function soltar(ev) {
+            var arrastraId = ev.dataTransfer.getData("Data");
+            ev.target.appendChild(document.getElementById(arrastraId));
+            ev.stopPropagation();
+            document.getElementById(arrastraId).style.border = "0px";
+            document.getElementById(arrastraId).style.margin = "0px";
+            document.getElementById(arrastraId).style.width = "204px";
+            document.getElementById(arrastraId).style.height = "204px";
+            return false;
+        }
+        function abortar(ev) {
+            var contenedorId = ev.target.getAttribute('id');
+            document.getElementById(contenedorId).style.background = "#BDBDBD";
+            return true;
+        }
+
+
+    </script>
+</head>
+
+<body>
+    <div id="principal">
+        <h1>PUZZLE INFANTIL</h1>
+        <div id="imagenes">
+            <img src="i1.jpg" id="i1" draggable="true" ondragstart="return empezar(event)"
+                ondragend="return terminar(event)" alt="imagen1">
+            <img src="i2.jpg" id="i2" draggable="true" ondragstart="return empezar(event)"
+                ondragend="return terminar(event)" alt="imagen2">
+            <img src="i3.jpg" id="i3" draggable="true" ondragstart="return empezar(event)"
+                ondragend="return terminar(event)" alt="imagen3">
+            <img src="i4.jpg" id="i4" draggable="true" ondragstart="return empezar(event)"
+                ondragend="return terminar(event)" alt="imagen4">
+            <img src="i5.jpg" id="i5" draggable="true" ondragstart="return empezar(event)"
+                ondragend="return terminar(event)" alt="imagen5">
+            <img src="i6.jpg" id="i6" draggable="true" ondragstart="return empezar(event)"
+                ondragend="return terminar(event)" alt="imagen6">
+        </div>
+
+        <div id="contenedores">
+            <div id="p1" ondragenter="return entrar(event)" ondragover="return encima(event)"
+                ondrop="return soltar(event)" ondragleave="return abortar(event)"></div>
+            <div id="p2" ondragenter="return entrar(event)" ondragover="return encima(event)"
+                ondrop="return soltar(event)" ondragleave="return abortar(event)"></div>
+            <div id="p3" ondragenter="return entrar(event)" ondragover="return encima(event)"
+                ondrop="return soltar(event)" ondragleave="return abortar(event)"></div>
+            <div id="p4" ondragenter="return entrar(event)" ondragover="return encima(event)"
+                ondrop="return soltar(event)" ondragleave="return abortar(event)"></div>
+            <div id="p5" ondragenter="return entrar(event)" ondragover="return encima(event)"
+                ondrop="return soltar(event)" ondragleave="return abortar(event)"></div>
+            <div id="p6" ondragenter="return entrar(event)" ondragover="return encima(event)"
+                ondrop="return soltar(event)" ondragleave="return abortar(event)"></div>
+
+        </div>
+    </div>
+</body>
+
+</html>
